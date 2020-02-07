@@ -1,0 +1,44 @@
+Ceci est la notice d'un programme de gestion de tâches (en ligne de commande), créé par Quentin Guitet (élève aux Mines de Paris) en 2020 dans le cadre d'un projet d'informatique C++.
+
+Après avoir lu cette notice, je vous invite à exécuter le script "tests.sh" qui contient de nombreux exemples illustrant les principales fonctionnalités du programme.
+
+Remarques générales :
+
+- Tous les arguments de la forme --argument peuvent être remplacés par un tiret suivi de l'initiale -a (à part --progress et --priority).
+- Les dates sont systématiquement au format x/y/z avec x, y et z des entiers, éventuellement à plusieurs chiffres.
+- Il y a deux moyens d'appeler les commandes : dans la console, on peut soit faire "[nom du fichier exécutable]", et on a alors une command line dans laquelle rentrer les différentes commandes spécifiques au programme, soit faire "[nom du fichier exécutable] [commande]".
+- On doit utiliser des "" si la chaîne de caractère utilise des espaces (marche dans tous les modes). On peut aussi utiliser des \ avant les espaces mais en mode "[nom du fichier exécutable] [commande]" uniquement (non implémenté en mode "[nom du fichier exécutable]")
+- Les ID sont définis de manière à traduire l'arborescence (par exemple, la 2ème sous-tâche de la 5ème tâche aura pour ID 5.2). Les ID ne sont pas modifiés lors de la suppression d'une tâche.
+
+
+
+
+Commandes possibles :
+
+create : crée une nouvelle tâche, demande au moins un titre (--title ou -t), suivi du titre
+	--title [title]
+	--mother [id] : crée la tâche en tant que sous-tâche d'une autre
+	--description [chaine de caractères] : description
+	--progress [nombre entre 0 et 100] : progrès (0 par défaut)
+	--begin [date format x/y/z] : date de début/création de la tâche (0/0/0 par défaut)
+	--end [date de clôture] : date de clôture de la tâche (0/0/0 par défaut)
+	--status [chaine de caractères] : statut de la tâche (vide par défaut), il est recommandé de mettre "unstarted", "in progress", 	"paused" ou "finished"
+	--priority [chaine de caractères]
+
+list : affiche un arbre des tâches. Possibilité de rajouter des critères, n'affiche que les tâches correspondant à ces critères (affiche de 		manière arborescente, donc si une tâche ne correspond pas aux critères, aucune de ses sous-tâches ne sera affichée)
+	--mother [id] l'affiche la branche associée à une tâche donnée
+	--title [title]
+	--description [chaine de caractères] : description
+	--progress [nombre entre 0 et 100] : progrès
+	--begin [date format x/y/z] : date de début/création de la tâche
+	--end [date de clôture] : date de clôture de la tâche
+	--status [chaine de caractères] : statut de la tâche
+	--priority [chaine de caractères]
+
+show [id] : affiche une tâche, demande un id de tâche
+
+comment [id] [commentary] : ajoute un commentaire à une tâche
+
+edit [id] [--argument [argument]] : modifie une tâche
+
+del [id] : supprime la tâche
